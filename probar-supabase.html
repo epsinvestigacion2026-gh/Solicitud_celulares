@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>Prueba de conexión con Supabase</title>
+</head>
+<body>
+  <h1>Prueba de Supabase</h1>
+
+  <form id="formulario">
+    <input id="correo" type="email" placeholder="Correo" required>
+    <input id="contrasena" type="password" placeholder="Contraseña" required>
+    <button type="submit">Iniciar sesión y comprobar</button>
+  </form>
+
+  <button id="salir" type="button">Cerrar sesión</button>
+  <p id="resultado"></p>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    const cliente = window.supabase.createClient(
+      'https://kuchizjpdnhcpenrdvky.supabase.co',
+      'sb_publishable_8DqeHXxuXVwrzARH0x-2nw_g77r8E1K'
+    );
+
+    const resultado = document.getElementById('resultado');
+
+    document.getElementById('formulario').addEventListener('submit', async (evento) => {
+      evento.preventDefault();
+      resultado.textContent = 'Comprobando conexión...';
+
+      const correo = document.getElementById('correo').value.trim();
+      const contrasena = document.getElementById('contrasena').value;
+
+      const { data: sesion, error: errorAcceso } =
+        await cliente.auth.signInWithPassword({
+          email: correo,
+          password: contrasena
+        });
+
+      if (errorAcceso) {
+        resultado.textContent = 'Error de acceso: ' + errorAcceso.message;
+        return;
+      }
+
+      const { data: perfil, error: errorPerfil } = await cliente
+        .from('perfiles')
+        .select('nombre, rol')
+        .eq('usuario_id', sesion.user.id)
+        .single();
+
+      if (errorPerfil) {
+        resultado.textContent = 'Acceso correcto, pero no se pudo leer el perfil: '
+          + errorPerfil.message;
+        return;
+      }
+
+      const { count, error: errorModulos } = await cliente
+        .from('modulos')
+        .select('*', { count: 'exact', head: true });
+
+      if (errorModulos) {
+        resultado.textContent = 'Perfil correcto, pero no se pudieron leer los módulos: '
+          + errorModulos.message;
+        return;
+      }
+
+      resultado.textContent =
+        `Conexión correcta. Usuario: ${perfil.nombre}. Rol: ${perfil.rol}. Módulos: ${count}.`;
+    });
+
+    document.getElementById('salir').addEventListener('click', async () => {
+      await cliente.auth.signOut();
+      resultado.textContent = 'Sesión cerrada.';
+    });
+  </script>
+</body>
+</html>

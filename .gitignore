@@ -1,0 +1,16 @@
+/vendor/
+/config.php
+/data/*.jsonl
+/data/admin-users.json
+/data/admin-login-attempts.json
+/.env
+/.env.*
+!/.env.example
+/.venv/
+/venv/
+/.vercel/
+/sitio-publico/.vercel/
+/importacion-supabase/
+**/__pycache__/
+*.pyc
+*.log

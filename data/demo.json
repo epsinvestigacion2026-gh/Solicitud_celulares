@@ -1,0 +1,20 @@
+[
+  {"region":"CENTRAL NORTE","c_finca":"351","finca":"San Patricio","codigo_modulo":"CEN-MNA-016","tipo_riego":"Mini Aspersion","personas_asignadas":4},
+  {"region":"CENTRAL NORTE","c_finca":"351","finca":"San Patricio","codigo_modulo":"CEN-MNA-017","tipo_riego":"Mini Aspersion","personas_asignadas":6},
+  {"region":"CENTRAL NORTE","c_finca":"351","finca":"San Patricio","codigo_modulo":"CEN-MNA-018","tipo_riego":"Mini Aspersion","personas_asignadas":4},
+  {"region":"CENTRAL NORTE","c_finca":"351","finca":"San Patricio","codigo_modulo":"CEN-MNA-027","tipo_riego":"Mini Aspersion","personas_asignadas":2},
+  {"region":"CENTRAL NORTE","c_finca":"355","finca":"Santa Cristina","codigo_modulo":"CEN-MNA-014","tipo_riego":"Mini Aspersion","personas_asignadas":6},
+  {"region":"CENTRAL NORTE","c_finca":"352","finca":"Santa Elisa","codigo_modulo":"CEN-ASP-011","tipo_riego":"Aspersion","personas_asignadas":6},
+  {"region":"CENTRAL NORTE","c_finca":"932","finca":"Santa Fe","codigo_modulo":"CEN-GRA-015","tipo_riego":"Gravedad","personas_asignadas":null},
+  {"region":"CENTRAL SUR","c_finca":"28","finca":"San Antonio","codigo_modulo":"CES-AVF-002","tipo_riego":"Avance Frontal","personas_asignadas":4},
+  {"region":"CENTRAL SUR","c_finca":"28","finca":"San Antonio","codigo_modulo":"CES-MNA-003","tipo_riego":"Mini Aspersion","personas_asignadas":4},
+  {"region":"CENTRAL SUR","c_finca":"30","finca":"San Fernando","codigo_modulo":"CES-MNA-007","tipo_riego":"Mini Aspersion","personas_asignadas":8},
+  {"region":"CENTRAL SUR","c_finca":"27","finca":"Santa Maria","codigo_modulo":"CES-AVF-001","tipo_riego":"Avance Frontal","personas_asignadas":0},
+  {"region":"OCCIDENTE","c_finca":"1010","finca":"Belgica","codigo_modulo":"OCR-MNA-036","tipo_riego":"Mini Aspersion","personas_asignadas":8},
+  {"region":"OCCIDENTE","c_finca":"1010","finca":"Belgica","codigo_modulo":"OCR-PVC-008","tipo_riego":"Pivote Central","personas_asignadas":1},
+  {"region":"OCCIDENTE","c_finca":"1001","finca":"Carmen Alejos","codigo_modulo":"OCR-PVC-013","tipo_riego":"Pivote Central","personas_asignadas":null},
+  {"region":"OCCIDENTE","c_finca":"1001","finca":"Carmen Alejos","codigo_modulo":"OCR-PVC-017","tipo_riego":"Pivote Central","personas_asignadas":0},
+  {"region":"OCCIDENTE","c_finca":"600","finca":"Colombita","codigo_modulo":"OCR-MNA-006","tipo_riego":"Mini Aspersion","personas_asignadas":5},
+  {"region":"OCCIDENTE","c_finca":"600","finca":"Colombita","codigo_modulo":"OCR-MNA-021","tipo_riego":"Mini Aspersion","personas_asignadas":7},
+  {"region":"OCCIDENTE","c_finca":"1011","finca":"El Piñon","codigo_modulo":"OCR-MNA-004","tipo_riego":"Mini Aspersion","personas_asignadas":10}
+]

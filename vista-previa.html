@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f7fa">
+  <title>Registro de solicitud · Celulares</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>:root{font-family:'DM Sans',sans-serif;color:#172b38;background:#f5f7f9;font-synthesis:none}*{box-sizing:border-box}body{margin:0}button,input,select{font:inherit}button{cursor:pointer}.hidden{display:none!important}.shell{min-height:100vh;display:flex}.sidebar{width:254px;flex:none;background:#102a32;color:#d2dfe0;min-height:100vh;padding:34px 15px 22px;display:flex;flex-direction:column;position:sticky;top:0;height:100vh}.brand{display:flex;align-items:center;gap:10px;margin:2px 17px 57px}.brand-mark{width:37px;height:37px;background:#c9ed71;border-radius:11px;color:#183c2c;display:grid;place-items:center;font-size:28px;font-weight:700;transform:rotate(-8deg)}.brand-signal{transform:rotate(8deg)}.brand strong{font-family:Manrope,sans-serif;color:white;display:block;font-size:17px;letter-spacing:-.7px;line-height:1.15}.brand strong span{color:#c9ed71}.brand small{font-size:9px;letter-spacing:2.15px;color:#829aa0;font-weight:700}.sidebar-label{font-size:10px;font-weight:800;letter-spacing:1.8px;color:#718b90;margin:0 17px 15px}.nav-item{height:45px;display:flex;align-items:center;gap:12px;border-radius:9px;padding:0 15px;font-size:12px;font-weight:700}.nav-item.current{color:#d9f5de;background:#21483f}.nav-item.muted{color:#819da2;margin-top:5px}.nav-icon{font-size:18px;font-weight:400;width:17px;text-align:center}.nav-dot{margin-left:auto;background:#c9ed71;width:6px;height:6px;border-radius:50%}.sidebar-bottom{margin-top:auto;border-top:1px solid #315058;padding:22px 11px 6px;display:flex;gap:11px;align-items:center}.help-icon{width:30px;height:30px;flex:none;border:1px solid #618177;border-radius:50%;display:grid;place-items:center;color:#c7eb96;font-weight:800}.sidebar-bottom strong,.sidebar-bottom span{display:block;font-size:11px}.sidebar-bottom span{color:#779499;font-size:10px;margin-top:3px}.workspace{flex:1;min-width:0}.topbar{height:72px;border-bottom:1px solid #e8eef0;background:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 49px}.crumb{font-size:12px;color:#8d9ba1}.crumb span{margin:0 11px;color:#c8d1d4}.crumb b{color:#283f48;font-weight:700}.top-right{display:flex;align-items:center;gap:20px}.environment{color:#527355;background:#eaf3df;border:1px solid #e0edce;padding:7px 10px;border-radius:5px;font-size:9px;letter-spacing:.8px;font-weight:800}.avatar{border-radius:50%;width:31px;height:31px;display:grid;place-items:center;background:#e5efe7;color:#316050;font-size:10px;font-weight:800}.main{padding:48px max(35px,calc((100vw - 1410px)/2)) 18px;max-width:1500px;margin:auto}.heading{display:flex;align-items:center;justify-content:space-between;margin-bottom:36px}.eyebrow{display:flex;align-items:center;gap:9px;color:#618e5d;font-size:10px;font-weight:800;letter-spacing:2px}.eyebrow-line{width:17px;height:2px;background:#82aa6e}.heading h1{font:800 clamp(27px,2.35vw,34px)/1.3 Manrope,sans-serif;letter-spacing:-1.5px;margin:11px 0 7px;color:#182f3a}.heading p{font-size:13px;color:#7b8c93;margin:0}.heading-icon{width:45px;height:45px;background:#e6efeb;border:1px solid #d8e8e2;border-radius:12px;display:grid;place-items:center;color:#3c8063;font-size:22px}.steps{display:flex;align-items:center;gap:14px;margin-bottom:29px}.step{display:flex;align-items:center;gap:9px;font-size:11px;font-weight:700;color:#9aa8ab;white-space:nowrap}.step.active{color:#326d52}.step-number{width:24px;height:24px;display:grid;place-items:center;border-radius:50%;font-family:Manrope,sans-serif;font-size:9px;border:1px solid #d9e2e4;color:#9dadb1}.step.active .step-number{background:#32835b;color:white;border-color:#32835b}.step-rule{height:1px;background:#dfe6e8;width:48px}.layout{display:grid;grid-template-columns:minmax(0,1fr) 288px;gap:24px;align-items:start}.main-column{min-width:0}.card{background:#fff;border:1px solid #e6ecec;border-radius:12px;box-shadow:0 4px 18px rgba(19,49,56,.025);margin-bottom:19px}.selector-card,.people-card{padding:27px 30px 29px}.card-header{display:flex;gap:15px;align-items:start;margin-bottom:25px}.section-icon{width:38px;height:38px;flex:none;border-radius:10px;background:#e8f3ed;color:#3e8d68;display:grid;place-items:center;font-size:22px}.people-icon{font-size:20px}.section-kicker{color:#5b9a72;font-size:9px;font-weight:800;letter-spacing:1.4px}.card-header h2{font:800 17px Manrope,sans-serif;letter-spacing:-.35px;margin:4px 0 5px}.card-header p{color:#8a9ba0;font-size:11px;margin:0;line-height:1.5}.selector-grid{display:grid;grid-template-columns:1fr 1fr;gap:21px 16px}.field{display:flex;flex-direction:column;gap:9px;min-width:0}.field.full{grid-column:1/-1}.field-label{font-size:11px;font-weight:700;color:#3a515a}.field-label em{font-style:normal;color:#dd7a62}.select-wrap{position:relative}.select-wrap:after{content:'⌄';position:absolute;right:14px;top:50%;transform:translateY(-58%);color:#667d83;pointer-events:none;font-size:19px;line-height:1}.field select,.person-input,.inventory-input{height:42px;width:100%;border:1px solid #dce5e6;background:#fff;border-radius:7px;padding:0 13px;color:#273e45;outline:none;font-size:12px;transition:border .18s,box-shadow .18s}.field select{appearance:none;padding-right:35px}.field select:disabled{background:#f7f9f9;color:#a5b2b4}.field select:focus,.person-input:focus,.inventory-input:focus{border-color:#72a88b;box-shadow:0 0 0 3px #dff2e7}.field-footer{margin-top:24px;padding-top:17px;border-top:1px solid #edf1f1;color:#879b9f;font-size:11px;display:flex;align-items:center;gap:8px}.info-dot{border:1px solid #adc6b9;color:#65a782;border-radius:50%;width:15px;height:15px;display:grid;place-items:center;font-size:10px;font-weight:700;flex:none}.details-card{padding:17px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;border-color:#cfe5d8}.details-left{display:flex;align-items:center;gap:13px}.details-glyph{background:#e9f5e6;color:#458a60;width:41px;height:41px;display:grid;place-items:center;border-radius:9px;font-size:19px}.small-label{font-size:9px;font-weight:800;color:#7f9890;letter-spacing:1.2px;display:block}.details-left strong{display:block;font:800 15px Manrope,sans-serif;margin:3px 0;color:#24483d}.details-sub{color:#829493;font-size:11px}.pill{display:flex;align-items:center;gap:6px;border-radius:30px;background:#edf6ed;padding:8px 11px;font-size:10px;font-weight:700;color:#417957;white-space:nowrap}.pill-dot{height:6px;width:6px;background:#64ab78;border-radius:50%}.people-card{min-height:284px}.empty-state{text-align:center;padding:20px 20px 11px;max-width:440px;margin:auto}.empty-art{height:84px;display:flex;align-items:center;justify-content:center;gap:9px}.empty-art-main{border:1px solid #d4e7de;background:#eff7f2;border-radius:12px;width:67px;height:67px;display:grid;place-items:center;color:#81aa94;font-size:30px;box-shadow:0 7px 15px #dceee394}.empty-art-small{width:32px;height:32px;border:1px solid #e5eee9;border-radius:8px;display:grid;place-items:center;color:#afc6b7;transform:rotate(-9deg)}.empty-art-small:last-child{transform:rotate(10deg)}.empty-state h3{font:800 13px Manrope,sans-serif;color:#344c51;margin:12px 0 6px}.empty-state p{font-size:11px;line-height:1.7;color:#98a9aa;margin:0}.alert{border:1px solid #f0dfbd;background:#fff8e9;color:#79582b;padding:16px;border-radius:8px;font-size:12px;line-height:1.6}.allocation-banner{border:1px solid #dcece2;background:#f5faf6;border-radius:8px;display:flex;align-items:center;gap:10px;padding:12px 14px;color:#426b53;font-size:11px;line-height:1.5;margin-bottom:17px}.allocation-icon{background:#d8eddd;border-radius:50%;width:18px;height:18px;display:grid;place-items:center;font-weight:700;flex:none}.device-card{border:1px solid #e1e9e8;border-radius:9px;margin-top:14px;overflow:hidden}.device-header{background:#f7faf9;border-bottom:1px solid #e8eeec;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;gap:10px}.device-header strong{color:#264b3e;font:800 12px Manrope,sans-serif}.device-header span{color:#839996;font-size:10px}.device-body{padding:15px}.person-row{display:grid;grid-template-columns:24px minmax(0,1.5fr) minmax(0,1fr);gap:10px;align-items:end;margin-bottom:13px}.person-number{width:23px;height:23px;border-radius:50%;background:#eaf3ed;color:#42805b;font-size:10px;font-weight:800;display:grid;place-items:center;margin-bottom:10px}.person-row label{display:flex;flex-direction:column;gap:6px;min-width:0}.person-row label span,.inventory-row label span{color:#677f80;font-size:10px;font-weight:700}.person-input{height:37px;font-size:11px}.inventory-row{border-top:1px dashed #e5eeea;padding-top:12px;margin-top:4px;display:flex;align-items:center;gap:14px}.inventory-row label{display:flex;align-items:center;gap:12px;flex:1;min-width:0}.inventory-row label span{white-space:nowrap}.inventory-input{height:35px;max-width:260px;font-size:11px}.optional{font-size:9px;color:#94a6a5;white-space:nowrap}.form-actions{display:flex;justify-content:space-between;align-items:center;gap:15px;padding:5px 0 13px}.form-hint{font-size:11px;color:#91a2a6}.primary-button{background:#287a54;border:1px solid #287a54;border-radius:7px;box-shadow:0 4px 10px #266a4d28;color:white;font-weight:700;font-size:11px;padding:12px 17px;display:flex;gap:26px;align-items:center;justify-content:center;transition:background .2s,transform .2s;white-space:nowrap}.primary-button:hover:not(:disabled){background:#176744;transform:translateY(-1px)}.primary-button:disabled{background:#a8c1b3;border-color:#a8c1b3;box-shadow:none;cursor:not-allowed}.button-arrow{font-size:15px;line-height:10px}.summary-card{background:#174238;border-radius:11px;color:white;padding:24px 23px;position:relative;overflow:hidden;box-shadow:0 10px 24px #1b563b18}.summary-card:after{content:'';position:absolute;width:150px;height:150px;border:1px solid #ffffff12;border-radius:50%;top:-95px;right:-40px;box-shadow:0 0 0 28px #ffffff06,0 0 0 62px #ffffff04;pointer-events:none}.summary-top{display:flex;align-items:center;justify-content:space-between;font-size:9px;letter-spacing:1.35px;color:#a6d9bd;font-weight:800}.summary-sparkle{font-size:19px;color:#d1e89c}.summary-card h2{font:800 20px/1.35 Manrope,sans-serif;letter-spacing:-.5px;margin:16px 0 22px}.summary-divider{border-top:1px solid #427161}.metric{display:flex;align-items:center;gap:13px;margin:20px 0}.metric-symbol{height:37px;width:37px;border-radius:8px;background:#31604e;color:#b2e1bb;display:grid;place-items:center;font-size:20px;flex:none}.phone-symbol{font-size:18px}.metric span{color:#a9caba;font-size:11px;display:block}.metric strong{display:block;font:800 24px Manrope,sans-serif;line-height:1.15;margin-top:2px}.summary-divider.lower{margin-top:21px}.ratio{display:flex;align-items:center;gap:7px;font-size:10px;color:#badbc4;margin-top:17px}.ratio-icon{font-size:16px;color:#cee6a3}.tip-card{background:#fff;border:1px solid #e6ecec;border-radius:11px;margin-top:17px;padding:21px}.tip-heading{display:flex;align-items:center;gap:8px;color:#374e48;font-size:11px}.tip-icon{color:#70a777;font-size:16px}.tip-card p{font-size:11px;color:#809394;line-height:1.7;margin:11px 0 15px}.formula{font-size:11px;color:#357454;font-weight:800;background:#f1f8f1;border-radius:6px;padding:10px;text-align:center}.preview-note{font-size:10px;color:#a0adae;line-height:1.6;padding:17px 6px}.main footer{padding:45px 0 15px;text-align:center;color:#afbdbe;font-size:10px}.main footer span{padding:0 8px}.toast{position:fixed;bottom:24px;right:25px;background:#29473d;color:white;padding:13px 17px;border-radius:8px;font-size:12px;box-shadow:0 10px 30px #133b2d30;opacity:0;transform:translateY(8px);pointer-events:none;transition:.2s;max-width:350px;z-index:5}.toast.show{opacity:1;transform:translateY(0)}.modal-backdrop{position:fixed;inset:0;background:#112b29a6;display:grid;place-items:center;padding:22px;z-index:10}.modal{background:#fff;border-radius:15px;width:min(100%,390px);text-align:center;padding:33px;box-shadow:0 20px 80px #0d281c44}.modal-icon{width:54px;height:54px;display:grid;place-items:center;border-radius:50%;color:#288052;background:#e6f5e9;font-size:26px;margin:0 auto 15px}.modal h2{font:800 20px Manrope,sans-serif;margin:0 0 10px}.modal p{color:#7a9091;line-height:1.6;font-size:12px;margin:0 0 22px}.modal-button{margin:auto;gap:22px}@media(max-width:1150px){.sidebar{width:209px}.main{padding-left:28px;padding-right:28px}.layout{grid-template-columns:minmax(0,1fr) 245px;gap:17px}.topbar{padding:0 28px}}@media(max-width:900px){.sidebar{width:64px;padding:25px 8px}.brand{margin:0 auto 45px}.brand>div:last-child,.sidebar-label,.nav-item span:not(.nav-icon),.sidebar-bottom,.nav-dot{display:none}.nav-item{justify-content:center;padding:0}.layout{grid-template-columns:1fr}.summary-column{display:grid;grid-template-columns:1fr 1fr;gap:16px}.summary-card,.tip-card{margin:0}.preview-note{grid-column:1/-1;padding:0}.main{padding-top:34px}}@media(max-width:600px){.sidebar{display:none}.topbar{height:57px;padding:0 18px}.crumb{font-size:10px}.crumb span{margin:0 5px}.environment{display:none}.main{padding:27px 16px}.heading{margin-bottom:25px}.heading h1{font-size:26px}.heading-icon{display:none}.steps{gap:7px}.step-rule{width:13px}.step{font-size:9px}.step-number{height:20px;width:20px;font-size:8px}.selector-card,.people-card{padding:20px 18px}.selector-grid,.summary-column{grid-template-columns:1fr}.field.full{grid-column:auto}.details-card{align-items:start;flex-direction:column}.person-row{grid-template-columns:24px 1fr;gap:8px}.person-row label:last-child{grid-column:2}.person-number{align-self:center;margin:0}.inventory-row,.inventory-row label{align-items:stretch;flex-direction:column;gap:6px}.inventory-input{max-width:none}.form-actions{align-items:stretch;flex-direction:column}.primary-button{width:100%}.summary-column{gap:15px}}
+</style>
+  <link rel="stylesheet" href="assets/admin.css">
+  <link rel="stylesheet" href="assets/branding.css">
+</head>
+<body>
+  <div class="shell">
+    <aside class="sidebar" aria-label="Navegación">
+      <div class="brand"><span class="brand-logo"><img src="assets/img/mdg_logo.png" alt="Magdalena"></span></div>
+      <div class="sidebar-label">GESTIÓN</div>
+      <div class="nav-item current"><span class="nav-icon">▦</span><span>Solicitud de celulares</span><span class="nav-dot"></span></div>
+      <a class="nav-item admin-nav-link" href="admin.php" aria-label="Administración"><span class="nav-icon" aria-hidden="true">⚙</span><span>Administración</span></a>
+    </aside>
+
+    <div class="workspace">
+      <header class="topbar"><span class="mobile-brand"><span class="brand-logo"><img src="assets/img/mdg_logo.png" alt="Magdalena"></span></span><div class="crumb"><b>Nuevo registro</b></div><div class="top-right"><span class="environment">ENTORNO DE PRUEBA</span></div></header>
+      <main class="main">
+        <div class="heading"><div><div class="eyebrow"><span class="eyebrow-line"></span> CONTROL DE EQUIPOS</div><h1>Registro de solicitud de celulares</h1><p>Solicita equipos según los colaboradores registrados en cada módulo.</p></div><div class="heading-icon" aria-hidden="true">▣</div></div>
+
+        <div class="steps"><div class="step active"><span class="step-number">01</span><span>Ubicación del módulo</span></div><div class="step-rule"></div><div class="step" id="step-people"><span class="step-number">02</span><span>Colaboradores</span></div><div class="step-rule"></div><div class="step" id="step-review"><span class="step-number">03</span><span>Confirmar solicitud</span></div></div>
+
+        <div class="layout">
+          <section class="main-column">
+            <section class="card selector-card" aria-labelledby="location-title"><div class="card-header"><div class="section-icon">⌖</div><div><span class="section-kicker">PASO 01</span><h2 id="location-title">Selecciona la ubicación</h2><p>Las opciones se filtran con base en la región y finca elegidas.</p></div></div>
+              <div class="selector-grid"><label class="field"><span class="field-label">Región <em>*</em></span><span class="select-wrap"><select id="region" required><option value="">Seleccionar región</option></select></span></label><label class="field"><span class="field-label">Finca <em>*</em></span><span class="select-wrap"><select id="finca" required disabled><option value="">Primero selecciona una región</option></select></span></label><label class="field full"><span class="field-label">Código de módulo <em>*</em></span><span class="select-wrap"><select id="modulo" required disabled><option value="">Primero selecciona una finca</option></select></span></label></div>
+              <div class="field-footer"><span class="info-dot">i</span> La cantidad de personas se obtiene automáticamente de la base de datos.</div>
+            </section>
+
+            <section class="card details-card hidden" id="module-details" aria-live="polite"><div class="details-left"><div class="details-glyph">▦</div><div><span class="small-label">MÓDULO SELECCIONADO</span><strong id="selected-module"></strong><span class="details-sub" id="selected-farm"></span></div></div><div class="details-right"><span class="pill"><span class="pill-dot"></span><span id="selected-irrigation"></span></span></div></section>
+
+            <section class="card people-card" id="people-section" aria-labelledby="people-title"><div class="card-header"><div class="section-icon people-icon">♧</div><div><span class="section-kicker">PASO 02</span><h2 id="people-title">Datos de los colaboradores</h2><p>Ingresa el nombre y código de cada persona asignada al módulo.</p></div></div>
+              <div class="empty-state" id="empty-state"><div class="empty-art"><div class="empty-art-small">⌖</div><div class="empty-art-main">▦</div><div class="empty-art-small">♧</div></div><h3>Selecciona un módulo para continuar</h3><p>Aquí aparecerán los campos correspondientes a los colaboradores asignados y los celulares que se solicitarán.</p></div>
+              <div class="alert hidden" id="data-alert" role="status"></div>
+              <div id="people-content" class="hidden"><div class="allocation-banner"><span class="allocation-icon">✓</span><span id="allocation-text"></span></div><div id="device-list"></div></div>
+            </section>
+
+            <div class="form-actions"><span class="form-hint" id="form-hint">Selecciona una ubicación para comenzar el registro.</span><button id="submit-btn" class="primary-button" type="button" disabled><span>Registrar solicitud</span><span class="button-arrow">↗</span></button></div>
+          </section>
+
+          <aside class="summary-column"><section class="summary-card" aria-labelledby="summary-title"><div class="summary-top"><span>RESUMEN DE SOLICITUD</span><span class="summary-sparkle">✳</span></div><h2 id="summary-title">Tu solicitud,<br>de un vistazo.</h2><div class="summary-divider"></div><div class="metric"><div class="metric-symbol">♧</div><div><span>Personas asignadas</span><strong id="people-count">—</strong></div></div><div class="metric"><div class="metric-symbol phone-symbol">▣</div><div><span>Celulares a solicitar</span><strong id="phone-count">—</strong></div></div><div class="summary-divider lower"></div><div class="ratio"><span class="ratio-icon">⌁</span><span>1 celular por cada 2 colaboradores</span></div></section>
+            <section class="tip-card"><div class="tip-heading"><span class="tip-icon">✳</span><strong>¿Cómo se calcula?</strong></div><p>El sistema toma las personas asignadas al módulo y calcula un celular por cada dos. Si queda una persona sin pareja, se contempla un celular adicional.</p><div class="formula">⌈ personas asignadas ÷ 2 ⌉</div></section>
+            <div class="preview-note" id="mode-note"></div>
+          </aside>
+        </div>
+        <footer>Formulario de solicitud de celulares <span>&middot;</span> 2026</footer>
+      </main>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <div class="modal-backdrop hidden" id="success-modal"><div class="modal" role="dialog" aria-modal="true" aria-labelledby="success-title"><div class="modal-icon">✓</div><h2 id="success-title">Solicitud registrada</h2><p id="success-text"></p><button type="button" class="primary-button modal-button" id="new-entry">Registrar otra solicitud <span>↗</span></button></div></div>
+  <script>window.APP_CONFIG = {"records": [{"region": "CENTRAL NORTE", "c_finca": "351", "finca": "San Patricio", "codigo_modulo": "CEN-MNA-016", "tipo_riego": "Mini Aspersion", "personas_asignadas": 4}, {"region": "CENTRAL NORTE", "c_finca": "351", "finca": "San Patricio", "codigo_modulo": "CEN-MNA-017", "tipo_riego": "Mini Aspersion", "personas_asignadas": 6}, {"region": "CENTRAL NORTE", "c_finca": "351", "finca": "San Patricio", "codigo_modulo": "CEN-MNA-018", "tipo_riego": "Mini Aspersion", "personas_asignadas": 4}, {"region": "CENTRAL NORTE", "c_finca": "351", "finca": "San Patricio", "codigo_modulo": "CEN-MNA-027", "tipo_riego": "Mini Aspersion", "personas_asignadas": 2}, {"region": "CENTRAL NORTE", "c_finca": "355", "finca": "Santa Cristina", "codigo_modulo": "CEN-MNA-014", "tipo_riego": "Mini Aspersion", "personas_asignadas": 6}, {"region": "CENTRAL NORTE", "c_finca": "352", "finca": "Santa Elisa", "codigo_modulo": "CEN-ASP-011", "tipo_riego": "Aspersion", "personas_asignadas": 6}, {"region": "CENTRAL NORTE", "c_finca": "932", "finca": "Santa Fe", "codigo_modulo": "CEN-GRA-015", "tipo_riego": "Gravedad", "personas_asignadas": null}, {"region": "CENTRAL SUR", "c_finca": "28", "finca": "San Antonio", "codigo_modulo": "CES-AVF-002", "tipo_riego": "Avance Frontal", "personas_asignadas": 4}, {"region": "CENTRAL SUR", "c_finca": "28", "finca": "San Antonio", "codigo_modulo": "CES-MNA-003", "tipo_riego": "Mini Aspersion", "personas_asignadas": 4}, {"region": "CENTRAL SUR", "c_finca": "30", "finca": "San Fernando", "codigo_modulo": "CES-MNA-007", "tipo_riego": "Mini Aspersion", "personas_asignadas": 8}, {"region": "CENTRAL SUR", "c_finca": "27", "finca": "Santa Maria", "codigo_modulo": "CES-AVF-001", "tipo_riego": "Avance Frontal", "personas_asignadas": 0}, {"region": "OCCIDENTE", "c_finca": "1010", "finca": "Belgica", "codigo_modulo": "OCR-MNA-036", "tipo_riego": "Mini Aspersion", "personas_asignadas": 8}, {"region": "OCCIDENTE", "c_finca": "1010", "finca": "Belgica", "codigo_modulo": "OCR-PVC-008", "tipo_riego": "Pivote Central", "personas_asignadas": 1}, {"region": "OCCIDENTE", "c_finca": "1001", "finca": "Carmen Alejos", "codigo_modulo": "OCR-PVC-013", "tipo_riego": "Pivote Central", "personas_asignadas": null}, {"region": "OCCIDENTE", "c_finca": "1001", "finca": "Carmen Alejos", "codigo_modulo": "OCR-PVC-017", "tipo_riego": "Pivote Central", "personas_asignadas": 0}, {"region": "OCCIDENTE", "c_finca": "600", "finca": "Colombita", "codigo_modulo": "OCR-MNA-006", "tipo_riego": "Mini Aspersion", "personas_asignadas": 5}, {"region": "OCCIDENTE", "c_finca": "600", "finca": "Colombita", "codigo_modulo": "OCR-MNA-021", "tipo_riego": "Mini Aspersion", "personas_asignadas": 7}, {"region": "OCCIDENTE", "c_finca": "1011", "finca": "El Piñon", "codigo_modulo": "OCR-MNA-004", "tipo_riego": "Mini Aspersion", "personas_asignadas": 10}], "demo": true, "preview": true};</script>
+  <script>(() => {
+  'use strict';
+  const settings = window.APP_CONFIG || {records: [], preview: true, demo: true};
+  const records = Array.isArray(settings.records) ? settings.records : [];
+  const $ = id => document.getElementById(id);
+  const region = $('region'), finca = $('finca'), modulo = $('modulo');
+  const peopleSection = $('people-section'), peopleContent = $('people-content');
+  const deviceList = $('device-list'), submit = $('submit-btn');
+  const formHint = $('form-hint');
+  let selected = null;
+  let processedSelection = null;
+
+  function addOption(select, label, value) {
+    const option = document.createElement('option');
+    option.textContent = label;
+    option.value = value;
+    select.append(option);
+  }
+  function resetSelect(select, prompt) {
+    select.replaceChildren();
+    addOption(select, prompt, '');
+    select.value = '';
+    select.disabled = true;
+  }
+  function countOf(row) {
+    if (row.personas_asignadas === null || row.personas_asignadas === '' || row.personas_asignadas === undefined) return null;
+    const n = Number(row.personas_asignadas);
+    return Number.isInteger(n) && n >= 0 ? n : null;
+  }
+  function resetModule() {
+    selected = null;
+    $('module-details').classList.add('hidden');
+    $('empty-state').classList.remove('hidden');
+    $('data-alert').classList.add('hidden');
+    peopleContent.classList.add('hidden');
+    deviceList.replaceChildren();
+    $('people-count').textContent = '—';
+    $('phone-count').textContent = '—';
+    $('step-people').classList.remove('active');
+    $('step-review').classList.remove('active');
+    formHint.textContent = 'Selecciona una ubicación para comenzar el registro.';
+    submit.disabled = true;
+  }
+  const farmsForRegion = () => [...new Map(records.filter(r => r.region === region.value).map(r => [String(r.c_finca), r])).values()].sort((a,b) => a.finca.localeCompare(b.finca, 'es'));
+  function refreshRegions() {
+    resetSelect(region, records.length ? 'Seleccionar región' : 'No hay módulos pendientes');
+    [...new Set(records.map(r => r.region))].sort((a,b) => a.localeCompare(b,'es')).forEach(v => addOption(region,v,v));
+    region.disabled = records.length === 0;
+    region.dispatchEvent(new Event('change'));
+    if (!records.length) formHint.textContent = 'Todos los módulos tienen solicitudes registradas.';
+  }
+  function removeProcessed(row) {
+    const index = records.indexOf(row);
+    if (index !== -1) records.splice(index, 1);
+    refreshRegions();
+  }
+
+  region.addEventListener('change', () => {
+    resetSelect(finca, 'Seleccionar finca');
+    resetSelect(modulo, 'Primero selecciona una finca');
+    resetModule();
+    if (!region.value) { resetSelect(finca, 'Primero selecciona una región'); return; }
+    farmsForRegion().forEach(r => addOption(finca, `${r.finca} · ${r.c_finca}`, String(r.c_finca)));
+    finca.disabled = false;
+  });
+  finca.addEventListener('change', () => {
+    resetSelect(modulo, finca.value ? 'Seleccionar módulo' : 'Primero selecciona una finca');
+    resetModule();
+    if (!finca.value) return;
+    records.filter(r => r.region === region.value && String(r.c_finca) === finca.value)
+      .sort((a,b) => a.codigo_modulo.localeCompare(b.codigo_modulo, 'es'))
+      .forEach(r => addOption(modulo, r.codigo_modulo, r.codigo_modulo));
+    modulo.disabled = false;
+  });
+  modulo.addEventListener('change', () => {
+    resetModule();
+    if (!modulo.value) return;
+    selected = records.find(r => r.region === region.value && String(r.c_finca) === finca.value && r.codigo_modulo === modulo.value);
+    if (!selected) return;
+    $('module-details').classList.remove('hidden');
+    $('selected-module').textContent = selected.codigo_modulo;
+    $('selected-farm').textContent = `${selected.finca} · ${selected.region} · finca ${selected.c_finca}`;
+    $('selected-irrigation').textContent = selected.tipo_riego || 'Sin tipo de riego';
+    $('empty-state').classList.add('hidden');
+    const count = countOf(selected);
+    $('people-count').textContent = count === null ? 'Sin dato' : count;
+    $('phone-count').textContent = count === null ? '—' : Math.ceil(count / 2);
+    if (count === null || count === 0) {
+      $('data-alert').classList.remove('hidden');
+      $('data-alert').textContent = count === null
+        ? 'Este módulo no tiene un número válido de personas asignadas. Corregir antes de registrar la solicitud.'
+        : 'Este módulo tiene 0 personas asignadas. No corresponde registrar celulares para esta ubicación.';
+      formHint.textContent = 'Revisa las personas asignadas en la base de datos.';
+      return;
+    }
+    peopleContent.classList.remove('hidden');
+    $('step-people').classList.add('active');
+    const devices = Math.ceil(count / 2);
+    $('allocation-text').textContent = `${count} ${count === 1 ? 'persona asignada' : 'personas asignadas'} · ${devices} ${devices === 1 ? 'celular a solicitar' : 'celulares a solicitar'}${count % 2 ? ' · El último celular corresponde a una sola persona.' : '.'}`;
+    for (let device = 0; device < devices; device++) createDevice(device, count);
+    formHint.textContent = 'Completa los datos de todos los colaboradores para registrar.';
+    updateValidation();
+  });
+
+  function element(tag, className, content) {
+    const node = document.createElement(tag);
+    if (className) node.className = className;
+    if (content !== undefined) node.textContent = content;
+    return node;
+  }
+  function createDevice(index, count) {
+    const card = element('div', 'device-card');
+    const header = element('div', 'device-header');
+    header.append(element('strong', '', `Celular ${String(index + 1).padStart(2,'0')}`), element('span', '', index * 2 + 1 === count ? '1 colaborador' : '2 colaboradores'));
+    card.append(header);
+    const body = element('div', 'device-body');
+    for (let offset = 0; offset < 2 && index * 2 + offset < count; offset++) {
+      const personIndex = index * 2 + offset;
+      const row = element('div', 'person-row');
+      row.append(element('span', 'person-number', String(personIndex + 1)));
+      for (const [key,label,placeholder] of [['nombre','Nombre del colaborador','Nombre completo'],['codigo','Código del colaborador','Ej. COL-001']]) {
+        const field = element('label');
+        field.append(element('span','',label));
+        const input = element('input','person-input');
+        input.type = 'text'; input.placeholder = placeholder; input.required = true;
+        input.maxLength = key === 'nombre' ? 120 : 40;
+        input.autocomplete = 'off'; input.dataset.person = personIndex; input.dataset.field = key;
+        input.setAttribute('aria-label', `${label} ${personIndex + 1}`);
+        field.append(input); row.append(field);
+      }
+      body.append(row);
+    }
+    card.append(body); deviceList.append(card);
+  }
+  function updateValidation() {
+    const inputs = [...deviceList.querySelectorAll('.person-input')];
+    const codes = inputs.filter(x => x.dataset.field === 'codigo').map(x => x.value.trim().toLocaleLowerCase('es'));
+    const complete = inputs.length > 0 && inputs.every(x => x.value.trim());
+    const unique = new Set(codes).size === codes.length;
+    submit.disabled = !(complete && unique);
+    $('step-review').classList.toggle('active', !submit.disabled);
+    if (!complete) formHint.textContent = 'Completa los datos de todos los colaboradores para registrar.';
+    else if (!unique) formHint.textContent = 'Revisa los códigos: hay colaboradores repetidos.';
+    else formHint.textContent = 'Todo listo para registrar la solicitud.';
+  }
+  deviceList.addEventListener('input', updateValidation);
+  let toastTimeout;
+  function notify(message) { const box=$('toast'); box.textContent=message; box.classList.add('show'); clearTimeout(toastTimeout); toastTimeout=setTimeout(()=>box.classList.remove('show'),4500); }
+  submit.addEventListener('click', async () => {
+    if (!selected || submit.disabled) return;
+    const count = countOf(selected);
+    const colaboradores = Array.from({length:count}, (_, i) => ({
+      nombre: deviceList.querySelector(`[data-person="${i}"][data-field="nombre"]`).value.trim(),
+      codigo: deviceList.querySelector(`[data-person="${i}"][data-field="codigo"]`).value.trim(),
+    }));
+    const celulares = Array.from({length:Math.ceil(count/2)}, () => ({inventario:''}));
+    let recordId = 'VISTA PREVIA';
+    if (!settings.preview) {
+      submit.disabled = true; submit.querySelector('span').textContent = 'Guardando...';
+      try {
+        const response = await fetch(settings.submitUrl || 'index.php', {method:'POST',headers:{'Content-Type':'application/json','X-CSRF-Token':settings.csrf},body:JSON.stringify({module_key:[selected.region,selected.c_finca,selected.codigo_modulo].join('|'),colaboradores,celulares})});
+        const result = await response.json();
+        if (!response.ok || !result.ok) {
+          const error = new Error(result.message || 'No se pudo guardar.');
+          error.status = response.status;
+          throw error;
+        }
+        recordId = result.id;
+      } catch (error) {
+        notify(error.message || 'Error de conexión.');
+        if (error.status === 409) removeProcessed(selected);
+        else updateValidation();
+        return;
+      }
+      finally { submit.querySelector('span').textContent = 'Registrar solicitud'; }
+    }
+    processedSelection = selected;
+    $('success-text').textContent = `${Math.ceil(count/2)} ${Math.ceil(count/2) === 1 ? 'celular solicitado' : 'celulares solicitados'} para ${count} ${count === 1 ? 'colaborador' : 'colaboradores'} en ${selected.codigo_modulo}. Referencia: ${recordId}.`;
+    $('success-modal').classList.remove('hidden'); $('new-entry').focus();
+  });
+  $('new-entry').addEventListener('click', () => { $('success-modal').classList.add('hidden'); if (processedSelection) removeProcessed(processedSelection); processedSelection = null; if (!region.disabled) region.focus(); });
+  $('success-modal').addEventListener('click', e => { if (e.target === $('success-modal')) $('new-entry').click(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && !$('success-modal').classList.contains('hidden')) $('new-entry').click(); });
+
+  refreshRegions();
+  $('mode-note').textContent = settings.preview
+    ? 'Vista previa interactiva: el registro se simula y no se guarda. Abre index.php mediante un servidor PHP para guardar solicitudes.'
+    : settings.demo ? 'Datos de ejemplo tomados de las capturas. Los registros se guardan en data/solicitudes.jsonl.' : 'Catálogo conectado a la base de datos configurada. Los registros se guardan en data/solicitudes.jsonl.';
+})();
+</script>
+  <script defer src="assets/admin-preview.js"></script>
+</body>
+</html>

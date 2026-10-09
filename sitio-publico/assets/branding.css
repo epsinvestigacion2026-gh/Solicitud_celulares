@@ -1,0 +1,9 @@
+.brand-logo{--logo-width:188px;--logo-height:54px;--logo-image-width:260px;--logo-shift:-8px;position:relative;display:block;flex:none;width:var(--logo-width);height:var(--logo-height);overflow:hidden}
+.brand-logo img{position:absolute;left:50%;top:50%;width:var(--logo-image-width);height:auto;max-width:none;transform:translate(-50%,-50%) translateY(var(--logo-shift))}
+.sidebar .brand{margin:0 17px 52px;min-height:54px}
+.admin-topbar .admin-brand{display:inline-flex}
+.admin-brand .brand-logo{--logo-width:160px;--logo-height:46px;--logo-image-width:222px;--logo-shift:-7px}
+.mobile-brand{display:none}
+@media(max-width:1150px) and (min-width:901px){.sidebar .brand{margin:0 13px 46px;min-height:41px}.sidebar .brand-logo{--logo-width:140px;--logo-height:41px;--logo-image-width:194px;--logo-shift:-6px}}
+@media(max-width:900px){.sidebar .brand{display:none}.mobile-brand{display:block;flex:none}.mobile-brand .brand-logo{--logo-width:124px;--logo-height:36px;--logo-image-width:171px;--logo-shift:-5px}}
+@media(max-width:600px){.topbar .crumb{display:none}.mobile-brand .brand-logo{--logo-width:118px;--logo-height:34px;--logo-image-width:163px;--logo-shift:-5px}}

@@ -1,0 +1,7 @@
+Options -Indexes
+RewriteEngine On
+RewriteRule ^(?:data|inc|scripts|tests|vendor)(?:/|$) - [F,L,NC]
+RewriteRule (^|/)\. - [F,L]
+<FilesMatch "^(config(\.example)?\.php|composer\.(json|lock)|view\.html|router\.php|README\.md)$">
+    Require all denied
+</FilesMatch>

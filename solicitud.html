@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f7fa">
+  <title>Registro de solicitud · Celulares</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css">
+  <link rel="stylesheet" href="assets/admin.css">
+  <link rel="stylesheet" href="assets/branding.css">
+</head>
+<body>
+  <div class="shell">
+    <aside class="sidebar" aria-label="Navegación">
+      <div class="brand"><span class="brand-logo"><img src="assets/img/mdg_logo.png" alt="Magdalena"></span></div>
+      <div class="sidebar-label">GESTIÓN</div>
+      <div class="nav-item current"><span class="nav-icon">▦</span><span>Solicitud de celulares</span><span class="nav-dot"></span></div>
+      <a class="nav-item admin-nav-link" href="administracion.html" aria-label="Administración"><span class="nav-icon" aria-hidden="true">⚙</span><span>Administración</span></a>
+    </aside>
+
+    <div class="workspace">
+      <header class="topbar"><span class="mobile-brand"><span class="brand-logo"><img src="assets/img/mdg_logo.png" alt="Magdalena"></span></span><div class="crumb"> <b>Nuevo registro</b></div><div class="top-right"><span class="signed-in-user"><!-- SIGNED_IN_USER --></span>
+        <form class="topbar-logout" id="logout-supabase">
+            <button type="submit">Cerrar sesión</button>
+        </form>
+      </div>
+    </header>
+      <main class="main">
+        <div class="heading"><div><div class="eyebrow"><span class="eyebrow-line"></span> CONTROL DE EQUIPOS</div><h1>Registro de solicitud de celulares</h1><p>Solicita equipos según los colaboradores registrados en cada módulo.</p></div><div class="heading-icon" aria-hidden="true">▣</div></div>
+
+        <div class="steps"><div class="step active"><span class="step-number">01</span><span>Ubicación del módulo</span></div><div class="step-rule"></div><div class="step" id="step-people"><span class="step-number">02</span><span>Colaboradores</span></div><div class="step-rule"></div><div class="step" id="step-review"><span class="step-number">03</span><span>Confirmar solicitud</span></div></div>
+
+        <div class="layout">
+          <section class="main-column">
+            <section class="card selector-card" aria-labelledby="location-title"><div class="card-header"><div class="section-icon">⌖</div><div><span class="section-kicker">PASO 01</span><h2 id="location-title">Selecciona la ubicación</h2><p>Las opciones se filtran con base en la región y finca elegidas.</p></div></div>
+              <div class="selector-grid"><label class="field"><span class="field-label">Región <em>*</em></span><span class="select-wrap"><select id="region" required><option value="">Seleccionar región</option></select></span></label><label class="field"><span class="field-label">Finca <em>*</em></span><span class="select-wrap"><select id="finca" required disabled><option value="">Primero selecciona una región</option></select></span></label><label class="field full"><span class="field-label">Código de módulo <em>*</em></span><span class="select-wrap"><select id="modulo" required disabled><option value="">Primero selecciona una finca</option></select></span></label></div>
+              <div class="field-footer"><span class="info-dot">i</span> La cantidad de personas se obtiene automáticamente de la base de datos.</div>
+            </section>
+
+            <section class="card details-card hidden" id="module-details" aria-live="polite"><div class="details-left"><div class="details-glyph">▦</div><div><span class="small-label">MÓDULO SELECCIONADO</span><strong id="selected-module"></strong><span class="details-sub" id="selected-farm"></span></div></div><div class="details-right"><span class="pill"><span class="pill-dot"></span><span id="selected-irrigation"></span></span></div></section>
+
+            <section class="card people-card" id="people-section" aria-labelledby="people-title"><div class="card-header"><div class="section-icon people-icon">♧</div><div><span class="section-kicker">PASO 02</span><h2 id="people-title">Datos de los colaboradores</h2><p>Ingresa el nombre y código de cada persona asignada al módulo.</p></div></div>
+              <div class="empty-state" id="empty-state"><div class="empty-art"><div class="empty-art-small">⌖</div><div class="empty-art-main">▦</div><div class="empty-art-small">♧</div></div><h3>Selecciona un módulo para continuar</h3><p>Aquí aparecerán los campos correspondientes a los colaboradores asignados y los celulares que se solicitarán.</p></div>
+              <div class="alert hidden" id="data-alert" role="status"></div>
+              <div id="people-content" class="hidden"><div class="allocation-banner"><span class="allocation-icon">✓</span><span id="allocation-text"></span></div><div id="device-list"></div></div>
+            </section>
+
+            <div class="form-actions"><span class="form-hint" id="form-hint">Selecciona una ubicación para comenzar el registro.</span><button id="submit-btn" class="primary-button" type="button" disabled><span>Registrar solicitud</span><span class="button-arrow">↗</span></button></div>
+          </section>
+
+          <aside class="summary-column"><section class="summary-card" aria-labelledby="summary-title"><div class="summary-top"><span>RESUMEN DE SOLICITUD</span><span class="summary-sparkle">✳</span></div><h2 id="summary-title">Tu solicitud,<br>de un vistazo.</h2><div class="summary-divider"></div><div class="metric"><div class="metric-symbol">♧</div><div><span>Personas asignadas</span><strong id="people-count">—</strong></div></div><div class="metric"><div class="metric-symbol phone-symbol">▣</div><div><span>Celulares a solicitar</span><strong id="phone-count">—</strong></div></div><div class="summary-divider lower"></div><div class="ratio"><span class="ratio-icon">⌁</span><span>1 celular por cada 2 colaboradores</span></div></section>
+            <section class="tip-card"><div class="tip-heading"><span class="tip-icon">✳</span><strong>¿Cómo se calcula?</strong></div><p>El sistema toma las personas asignadas al módulo y calcula un celular por cada dos. Si queda una persona sin pareja, se contempla un celular adicional.</p><div class="formula">⌈ personas asignadas ÷ 2 ⌉</div></section>
+            <div class="preview-note" id="mode-note"></div>
+          </aside>
+        </div>
+        <footer>Formulario de solicitud de celulares <span>&middot;</span> 2026</footer>
+      </main>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <div class="modal-backdrop hidden" id="success-modal"><div class="modal" role="dialog" aria-modal="true" aria-labelledby="success-title"><div class="modal-icon">✓</div><h2 id="success-title">Solicitud registrada</h2><p id="success-text"></p><button type="button" class="primary-button modal-button" id="new-entry">Registrar otra solicitud <span>↗</span></button></div></div>
+  <!-- APP_CONFIG -->
+ <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="assets/supabase-config.js"></script>
+<script src="assets/solicitud-supabase.js"></script>
+</body>
+</html>

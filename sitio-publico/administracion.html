@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Administración · Solicitudes de celulares</title>
+  <link rel="stylesheet" href="assets/styles.css">
+  <link rel="stylesheet" href="assets/admin.css">
+  <link rel="stylesheet" href="assets/branding.css">
+</head>
+<body class="admin-body">
+  <header class="admin-topbar">
+    <a class="admin-brand" href="solicitud.html">
+      <span class="brand-logo">
+        <img src="assets/img/mdg_logo.png" alt="Magdalena">
+      </span>
+    </a>
+    <a href="solicitud.html">Volver al formulario ↗</a>
+  </header>
+
+  <main class="admin-main">
+    <div class="eyebrow">ADMINISTRACIÓN</div>
+    <h1>Solicitudes registradas</h1>
+    <p class="admin-intro">
+      Consulta las solicitudes guardadas en Supabase.
+    </p>
+
+    <div class="admin-toolbar">
+      <span>Sesión: <strong id="admin-usuario">Cargando...</strong></span>
+      <button class="admin-secondary" id="admin-salir" type="button">
+        Cerrar sesión
+      </button>
+    </div>
+
+    <p id="admin-estado" role="status">Cargando solicitudes...</p>
+
+    <section class="card admin-filters" aria-labelledby="filter-title">
+      <div class="admin-filter-heading">
+        <div>
+          <h2 id="filter-title">Filtrar solicitudes</h2>
+          <p>Combina ubicación, usuario y fechas para analizar los registros.</p>
+        </div>
+        <span id="admin-conteo">Cargando...</span>
+      </div>
+
+      <form id="admin-filtros">
+        <div class="admin-filter-grid">
+          <label>Región
+            <select id="filter-region">
+              <option value="">Todas las regiones</option>
+            </select>
+          </label>
+
+          <label>Finca
+            <select id="filter-farm">
+              <option value="">Todas las fincas</option>
+            </select>
+          </label>
+
+          <label>Módulo
+            <select id="filter-module">
+              <option value="">Todos los módulos</option>
+            </select>
+          </label>
+
+          <label>Usuario solicitante
+            <select id="filter-user">
+              <option value="">Todos los usuarios</option>
+            </select>
+          </label>
+
+          <label>Desde
+            <input id="filter-from" type="date">
+          </label>
+
+          <label>Hasta
+            <input id="filter-to" type="date">
+          </label>
+
+          <label class="admin-filter-search">
+            Buscar referencia o colaborador
+            <input id="filter-search" type="search" maxlength="120"
+                   placeholder="Referencia, nombre o código">
+          </label>
+        </div>
+
+        <div class="admin-filter-actions">
+          <button class="primary-button" type="submit">Aplicar filtros</button>
+          <button class="admin-secondary" type="reset">Limpiar filtros</button>
+        </div>
+      </form>
+    </section>
+
+    <div class="admin-metrics">
+      <div class="card">
+        <span>Solicitudes registradas</span>
+        <strong id="total-solicitudes">—</strong>
+      </div>
+      <div class="card">
+        <span>Colaboradores en solicitudes</span>
+        <strong id="total-colaboradores">—</strong>
+      </div>
+      <div class="card">
+        <span>Celulares solicitados</span>
+        <strong id="total-celulares">—</strong>
+      </div>
+    </div>
+
+    <section class="card admin-records">
+      <div class="admin-records-heading">
+        <div>
+          <h2>Resultados</h2>
+          <p id="admin-resumen">Preparando listado...</p>
+        </div>
+        <button class="primary-button" id="descargar-excel" type="button">
+          Descargar Excel <span aria-hidden="true">↓</span>
+        </button>
+      </div>
+
+      <div class="admin-table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Referencia</th>
+              <th>Usuario solicitante</th>
+              <th>Fecha</th>
+              <th>Región</th>
+              <th>Finca</th>
+              <th>Módulo</th>
+              <th>Personas</th>
+              <th>Celulares</th>
+            </tr>
+          </thead>
+          <tbody id="admin-lista"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="assets/supabase-config.js"></script>
+  <script src="assets/xlsx.full.min.js"></script>
+  <script src="assets/administracion-supabase.js"></script>
+  <script src="assets/exportar-excel.js"></script>
+</body>
+</html>

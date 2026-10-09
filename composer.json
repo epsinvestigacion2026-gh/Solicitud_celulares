@@ -1,0 +1,14 @@
+{
+    "name": "imsa/solicitud-celulares",
+    "description": "Formulario de solicitud de celulares con exportacion administrativa",
+    "type": "project",
+    "require": {
+        "php": "^8.1",
+        "ext-mbstring": "*",
+        "phpoffice/phpspreadsheet": "^5.8"
+    },
+    "config": {
+        "platform": {"php": "8.1.0"},
+        "sort-packages": true
+    }
+}

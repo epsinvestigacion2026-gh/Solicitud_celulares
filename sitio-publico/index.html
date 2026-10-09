@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Iniciar sesión · Solicitudes de celulares</title>
+  <link rel="stylesheet" href="assets/styles.css">
+  <link rel="stylesheet" href="assets/admin.css">
+  <link rel="stylesheet" href="assets/branding.css">
+</head>
+<body class="admin-body">
+  <header class="admin-topbar">
+    <span class="admin-brand">
+      <span class="brand-logo">
+        <img src="assets/img/mdg_logo.png" alt="Magdalena">
+      </span>
+    </span>
+  </header>
+
+  <main class="admin-main admin-login">
+    <div class="eyebrow">SOLICITUD DE CELULARES</div>
+    <h1>Iniciar sesión</h1>
+    <p class="admin-intro">Ingresa con una de las cuentas autorizadas.</p>
+
+    <div class="alert admin-alert" id="acceso-error"
+         role="alert" style="display: none"></div>
+
+    <form class="card admin-login-card" id="acceso-formulario">
+      <label class="field" for="acceso-correo">
+        <span class="field-label">Correo</span>
+        <input id="acceso-correo" type="email"
+               autocomplete="username" required autofocus>
+      </label>
+
+      <label class="field" for="acceso-contrasena">
+        <span class="field-label">Contraseña</span>
+        <input id="acceso-contrasena" type="password"
+               autocomplete="current-password" required>
+      </label>
+
+      <button class="primary-button" id="acceso-boton" type="submit">
+        Iniciar sesión
+      </button>
+    </form>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="assets/supabase-config.js"></script>
+  <script src="assets/acceso-supabase.js"></script>
+</body>
+</html>
