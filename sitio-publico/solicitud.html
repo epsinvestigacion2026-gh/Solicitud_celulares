@@ -11,6 +11,14 @@
   <link rel="stylesheet" href="assets/styles.css">
   <link rel="stylesheet" href="assets/admin.css">
   <link rel="stylesheet" href="assets/branding.css">
+  <link rel="stylesheet" href="assets/branding.css">
+<style>
+  html:not(.sesion-verificada) body {
+    visibility: hidden;
+  }
+</style>
+</head>
+<body>
 </head>
 <body>
   <div class="shell">
@@ -66,6 +74,7 @@
   <!-- APP_CONFIG -->
  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="assets/supabase-config.js"></script>
+<script src="assets/proteger-sesion.js"></script>
 <script src="assets/solicitud-supabase.js"></script>
 </body>
 </html>

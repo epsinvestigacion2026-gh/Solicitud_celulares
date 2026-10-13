@@ -26,6 +26,7 @@
     document.getElementById('logout-supabase')
       .addEventListener('submit', async (evento) => {
         evento.preventDefault();
+        localStorage.removeItem('imsa_ultima_actividad');
         await cliente.auth.signOut({ scope: 'local' });
         window.location.replace('index.html');
       });

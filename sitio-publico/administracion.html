@@ -7,6 +7,14 @@
   <link rel="stylesheet" href="assets/styles.css">
   <link rel="stylesheet" href="assets/admin.css">
   <link rel="stylesheet" href="assets/branding.css">
+  <link rel="stylesheet" href="assets/branding.css">
+<style>
+  html:not(.sesion-verificada) body {
+    visibility: hidden;
+  }
+</style>
+</head>
+<body class="admin-body">
 </head>
 <body class="admin-body">
   <header class="admin-topbar">
@@ -139,6 +147,7 @@
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="assets/supabase-config.js"></script>
+  <script src="assets/proteger-sesion.js"></script>
   <script src="assets/xlsx.full.min.js"></script>
   <script src="assets/administracion-supabase.js"></script>
   <script src="assets/exportar-excel.js"></script>

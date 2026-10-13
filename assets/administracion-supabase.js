@@ -60,6 +60,7 @@
     porId('admin-usuario').textContent = perfil.nombre;
 
     porId('admin-salir').addEventListener('click', async () => {
+      localStorage.removeItem('imsa_ultima_actividad');
       await cliente.auth.signOut({ scope: 'local' });
       window.location.replace('index.html');
     });
