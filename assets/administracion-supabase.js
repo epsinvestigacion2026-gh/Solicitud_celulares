@@ -198,6 +198,7 @@
       });
 
       window.solicitudesParaExportar = filtradas;
+      window.actualizarGraficoFincas(filtradas);
       porId('total-solicitudes').textContent = filtradas.length;
       porId('total-colaboradores').textContent = filtradas.reduce(
         (total, fila) => total + Number(fila.personas_asignadas || 0), 0
