@@ -5,7 +5,11 @@
     '#587eb5',
     '#a16caa',
     '#d97761',
-    '#95a3b1'
+    '#95a3b1',
+    '#487d83',
+    '#b38956',
+    '#786d9c',
+    '#639768'
   ];
 
   window.actualizarGraficoFincas = (solicitudes) => {
@@ -22,72 +26,59 @@
       return;
     }
 
-    const grupos = new Map();
+    const conteoPorRegion = new Map();
 
-    for (const fila of solicitudes) {
-      // La clave incluye región y código para distinguir fincas homónimas.
-      const clave = `${fila.region}|${fila.c_finca}`;
+    for (const solicitud of solicitudes) {
+      const region = String(solicitud.region || '').trim() || 'Sin región';
 
-      if (!grupos.has(clave)) {
-        grupos.set(clave, {
-          nombre: `${fila.finca} · ${fila.region} (finca ${fila.c_finca})`,
-          cantidad: 0
-        });
-      }
-
-      grupos.get(clave).cantidad += 1;
+      conteoPorRegion.set(
+        region,
+        (conteoPorRegion.get(region) || 0) + 1
+      );
     }
 
-    const ordenados = [...grupos.values()].sort(
-      (a, b) => b.cantidad - a.cantidad ||
-        a.nombre.localeCompare(b.nombre, 'es')
-    );
-
-    const partes = ordenados.slice(0, 5);
-    const cantidadOtras = ordenados.slice(5).reduce(
-      (total, grupo) => total + grupo.cantidad, 0
-    );
-
-    if (cantidadOtras > 0) {
-      partes.push({
-        nombre: 'Otras fincas',
-        cantidad: cantidadOtras
-      });
-    }
+    const regiones = [...conteoPorRegion.entries()]
+      .map(([nombre, cantidad]) => ({ nombre, cantidad }))
+      .sort(
+        (a, b) => b.cantidad - a.cantidad ||
+          a.nombre.localeCompare(b.nombre, 'es')
+      );
 
     const total = solicitudes.length;
     let acumulado = 0;
 
-    const sectores = partes.map((parte, indice) => {
+    const sectores = regiones.map((region, indice) => {
+      const color = COLORES[indice % COLORES.length];
       const desde = (acumulado / total * 100).toFixed(4);
-      acumulado += parte.cantidad;
+
+      acumulado += region.cantidad;
       const hasta = (acumulado / total * 100).toFixed(4);
 
       const elemento = document.createElement('li');
-      const color = document.createElement('span');
+      const muestraColor = document.createElement('span');
       const nombre = document.createElement('span');
       const valor = document.createElement('strong');
 
-      color.className = 'admin-farm-chart-color';
-      color.style.backgroundColor = COLORES[indice];
+      muestraColor.className = 'admin-farm-chart-color';
+      muestraColor.style.backgroundColor = color;
 
-      nombre.textContent = parte.nombre;
+      nombre.textContent = region.nombre;
       valor.textContent =
-        `${parte.cantidad} (${(parte.cantidad / total * 100).toFixed(1)} %)`;
+        `${region.cantidad} (${(region.cantidad / total * 100).toFixed(1)} %)`;
 
-      elemento.append(color, nombre, valor);
+      elemento.append(muestraColor, nombre, valor);
       leyenda.appendChild(elemento);
 
-      return `${COLORES[indice]} ${desde}% ${hasta}%`;
+      return `${color} ${desde}% ${hasta}%`;
     });
 
     grafico.style.background = `conic-gradient(${sectores.join(', ')})`;
     grafico.setAttribute(
       'aria-label',
-      `${total} solicitudes distribuidas entre ${ordenados.length} fincas`
+      `${total} solicitudes distribuidas entre ${regiones.length} regiones`
     );
 
     resumen.textContent =
-      `${total} solicitudes en ${ordenados.length} fincas, según los filtros aplicados.`;
+      `${total} solicitudes en ${regiones.length} regiones, según los filtros aplicados.`;
   };
 })();
