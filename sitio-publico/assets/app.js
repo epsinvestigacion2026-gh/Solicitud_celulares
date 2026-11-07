@@ -11,6 +11,23 @@
     ? settings.records
     : [];
 
+  const farmRecords = Array.isArray(settings.farms)
+    ? settings.farms
+    : [
+        ...new Map(
+          records.map(fila => [
+            `${fila.region}|${fila.c_finca}`,
+            fila
+          ])
+        ).values()
+      ].map(fila => ({
+        ...fila,
+        modulos_totales: records.filter(modulo =>
+          modulo.region === fila.region &&
+          String(modulo.c_finca) === String(fila.c_finca)
+        ).length
+      }));
+
   const $ = id => document.getElementById(id);
 
   const region = $('region');
@@ -81,7 +98,7 @@
   function farmsForRegion() {
     return [
       ...new Map(
-        records
+        farmRecords
           .filter(fila => fila.region === region.value)
           .map(fila => [String(fila.c_finca), fila])
       ).values()
@@ -91,25 +108,25 @@
   function refreshRegions() {
     resetSelect(
       region,
-      records.length
+      farmRecords.length
         ? 'Seleccionar región'
-        : 'No hay módulos disponibles'
+        : 'No hay fincas disponibles'
     );
 
     const regiones = [
-      ...new Set(records.map(fila => fila.region))
+      ...new Set(farmRecords.map(fila => fila.region))
     ].sort((a, b) => a.localeCompare(b, 'es'));
 
     regiones.forEach(valor => {
       addOption(region, valor, valor);
     });
 
-    region.disabled = records.length === 0;
+    region.disabled = farmRecords.length === 0;
     region.dispatchEvent(new Event('change'));
 
-    if (!records.length) {
+    if (!farmRecords.length) {
       formHint.textContent =
-        'No hay módulos disponibles para tu usuario. Puede que tus fincas no tengan módulos en el catálogo o que ya tengan solicitudes registradas.';
+        'No hay fincas asignadas o disponibles para tu usuario.';
     }
   }
 
@@ -156,11 +173,35 @@
 
     if (!finca.value) return;
 
-    records
-      .filter(fila =>
+    const disponibles = records.filter(fila =>
+      fila.region === region.value &&
+      String(fila.c_finca) === finca.value
+    );
+
+    if (!disponibles.length) {
+      const asignada = farmRecords.find(fila =>
         fila.region === region.value &&
         String(fila.c_finca) === finca.value
-      )
+      );
+
+      const sinCatalogo =
+        Number(asignada?.modulos_totales ?? 0) === 0;
+
+      resetSelect(
+        modulo,
+        sinCatalogo
+          ? 'Sin módulos en el catálogo'
+          : 'Sin módulos pendientes'
+      );
+
+      formHint.textContent = sinCatalogo
+        ? 'Esta finca está asignada a tu usuario, pero no tiene módulos cargados en el catálogo.'
+        : 'Esta finca está asignada a tu usuario, pero todos sus módulos ya tienen solicitudes registradas.';
+
+      return;
+    }
+
+    disponibles
       .sort((a, b) =>
         a.codigo_modulo.localeCompare(b.codigo_modulo, 'es')
       )

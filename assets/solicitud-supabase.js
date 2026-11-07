@@ -2,6 +2,32 @@
   const cliente = window.clienteSupabase;
   const aviso = document.getElementById('form-hint');
 
+  async function cargarListado(nombreFuncion) {
+    const filas = [];
+    let inicio = 0;
+
+    while (true) {
+      const { data, error } = await cliente
+        .rpc(nombreFuncion)
+        .range(inicio, inicio + 499);
+
+      if (error) throw error;
+
+      if (!Array.isArray(data)) {
+        throw new Error(
+          'La consulta ' + nombreFuncion +
+          ' no devolvió una lista válida.'
+        );
+      }
+
+      filas.push(...data);
+
+      if (data.length < 500) return filas;
+
+      inicio += 500;
+    }
+  }
+
   try {
     const { data: acceso, error: errorAcceso } =
       await cliente.auth.getUser();
@@ -17,14 +43,19 @@
       .eq('usuario_id', acceso.user.id)
       .single();
 
-    if (errorPerfil || !perfil) {
-      throw new Error('No se pudo obtener el perfil del usuario.');
+    if (
+      errorPerfil ||
+      !perfil ||
+      !['admin', 'jefe_produccion'].includes(perfil.rol)
+    ) {
+      throw new Error('No se pudo obtener un perfil autorizado.');
     }
 
-    document.querySelector('.signed-in-user').textContent = perfil.nombre;
+    document.querySelector('.signed-in-user').textContent =
+      perfil.nombre;
 
     document.getElementById('logout-supabase')
-      .addEventListener('submit', async (evento) => {
+      .addEventListener('submit', async evento => {
         evento.preventDefault();
         localStorage.removeItem('imsa_ultima_actividad');
         await cliente.auth.signOut({ scope: 'local' });
@@ -32,29 +63,20 @@
       });
 
     document.querySelectorAll('.admin-nav-link, .admin-mobile-link')
-      .forEach((enlace) => {
+      .forEach(enlace => {
         enlace.href = 'administracion.html';
-        enlace.style.display = perfil.rol === 'admin' ? '' : 'none';
+        enlace.style.display =
+          perfil.rol === 'admin' ? '' : 'none';
       });
 
-    const modulos = [];
-    let inicio = 0;
-
-    while (true) {
-      const { data, error } = await cliente
-        .rpc('modulos_disponibles')
-        .range(inicio, inicio + 499);
-
-      if (error) throw error;
-
-      modulos.push(...data);
-
-      if (data.length < 500) break;
-      inicio += 500;
-    }
+    const [fincas, modulos] = await Promise.all([
+      cargarListado('fincas_asignadas'),
+      cargarListado('modulos_disponibles')
+    ]);
 
     window.APP_CONFIG = {
       records: modulos,
+      farms: fincas,
       preview: false,
       demo: false,
       role: perfil.rol,
@@ -62,11 +84,20 @@
     };
 
     const scriptFormulario = document.createElement('script');
-    scriptFormulario.src = 'assets/app.js';
-    document.body.appendChild(scriptFormulario);
 
+    scriptFormulario.src = 'assets/app.js';
+
+    scriptFormulario.onerror = () => {
+      aviso.textContent =
+        'No se pudo cargar assets/app.js. Recarga la página.';
+    };
+
+    document.body.appendChild(scriptFormulario);
   } catch (error) {
     console.error(error);
-    aviso.textContent = 'No se pudieron cargar los módulos: ' + error.message;
+
+    aviso.textContent =
+      'No se pudieron cargar las fincas y módulos: ' +
+      error.message;
   }
 })();
