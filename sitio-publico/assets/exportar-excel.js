@@ -39,21 +39,36 @@
     }
 
     const solicitudes = [[
-      'Referencia', 'Usuario solicitante', 'Fecha y hora (Guatemala)',
-      'Región', 'Código de finca', 'Finca', 'Módulo',
-      'Tipo de riego', 'Personas asignadas', 'Celulares solicitados'
+      'Referencia',
+      'Usuario solicitante',
+      'Fecha y hora (Guatemala)',
+      'Región',
+      'Código de finca',
+      'Finca',
+      'Módulo',
+      'Tipo de riego',
+      'Personas asignadas',
+      'Celulares solicitados'
     ]];
 
     const colaboradores = [[
-      'Referencia de solicitud', 'Celular en la solicitud',
-      'Colaborador en la solicitud', 'Nombre del colaborador',
+      'Referencia de solicitud',
+      'Celular en la solicitud',
+      'Colaborador en la solicitud',
+      'Nombre del colaborador',
       'Código del colaborador'
     ]];
 
     const detalle = [[
-      'Referencia', 'Usuario solicitante',
-      'Fecha y hora (Guatemala)', 'Región', 'Finca', 'Módulo',
-      'Tipo de riego', 'Nombre del colaborador',
+      'Referencia',
+      'Usuario solicitante',
+      'Fecha y hora (Guatemala)',
+      'Región',
+      'Finca',
+      'Módulo',
+      'Tipo de riego',
+      'Celular asignado',
+      'Nombre del colaborador',
       'Código del colaborador'
     ]];
 
@@ -78,9 +93,14 @@
         : [];
 
       personas.forEach((persona, indice) => {
+        const numeroCelular = Math.floor(indice / 2) + 1;
+
+        const celularAsignado =
+          `Celular ${String(numeroCelular).padStart(2, '0')}`;
+
         colaboradores.push([
           String(registro.id),
-          Math.floor(indice / 2) + 1,
+          numeroCelular,
           indice + 1,
           String(persona.nombre || ''),
           String(persona.codigo || '')
@@ -94,6 +114,7 @@
           String(registro.finca || ''),
           String(registro.codigo_modulo || ''),
           String(registro.tipo_riego || ''),
+          celularAsignado,
           String(persona.nombre || ''),
           String(persona.codigo || '')
         ]);
@@ -106,7 +127,7 @@
       libro,
       crearHoja(
         solicitudes,
-        [23, 25, 27, 24, 19, 28, 24, 24, 20, 22]
+        [38, 30, 27, 24, 19, 28, 24, 24, 20, 22]
       ),
       'Solicitudes'
     );
@@ -115,7 +136,7 @@
       libro,
       crearHoja(
         colaboradores,
-        [26, 23, 26, 48, 26]
+        [38, 23, 26, 48, 26]
       ),
       'Colaboradores'
     );
@@ -124,7 +145,7 @@
       libro,
       crearHoja(
         detalle,
-        [23, 25, 27, 24, 28, 24, 24, 48, 26]
+        [38, 30, 27, 24, 28, 24, 24, 20, 48, 26]
       ),
       'Detalle completo'
     );
