@@ -30,6 +30,43 @@
     return hoja;
   }
 
+  // Numeración por módulo, igual que el formulario: un pedido parcial sigue
+  // desde los celulares y colaboradores ya pedidos en ese módulo, en orden
+  // de registro. Las solicitudes archivadas no cuentan.
+  function desfasesPorModulo(todas) {
+    const porModulo = new Map();
+
+    for (const fila of todas) {
+      if (fila.archivada) continue;
+
+      const clave = [fila.region, fila.c_finca, fila.codigo_modulo].join('|');
+      if (!porModulo.has(clave)) porModulo.set(clave, []);
+      porModulo.get(clave).push(fila);
+    }
+
+    const desfases = new Map();
+
+    for (const filas of porModulo.values()) {
+      filas.sort((a, b) =>
+        (Date.parse(a.fecha_registro) - Date.parse(b.fecha_registro)) ||
+        String(a.id).localeCompare(String(b.id))
+      );
+
+      let celulares = 0;
+      let personas = 0;
+
+      for (const fila of filas) {
+        desfases.set(String(fila.id), { celulares, personas });
+        celulares += Number(fila.celulares_solicitados || 0);
+        personas += Array.isArray(fila.colaboradores)
+          ? fila.colaboradores.length
+          : 0;
+      }
+    }
+
+    return desfases;
+  }
+
   boton.addEventListener('click', () => {
     const registros = window.solicitudesParaExportar;
 
@@ -37,6 +74,12 @@
       alert('Espera a que terminen de cargar las solicitudes.');
       return;
     }
+
+    const desfases = desfasesPorModulo(
+      Array.isArray(window.solicitudesTodas)
+        ? window.solicitudesTodas
+        : registros
+    );
 
     const solicitudes = [[
       'Referencia',
@@ -53,8 +96,8 @@
 
     const colaboradores = [[
       'Referencia de solicitud',
-      'Celular en la solicitud',
-      'Colaborador en la solicitud',
+      'Celular en el módulo',
+      'Colaborador en el módulo',
       'Nombre del colaborador',
       'Código del colaborador'
     ]];
@@ -92,8 +135,11 @@
         ? registro.colaboradores
         : [];
 
+      const desfase = desfases.get(String(registro.id)) ||
+        { celulares: 0, personas: 0 };
+
       personas.forEach((persona, indice) => {
-        const numeroCelular = Math.floor(indice / 2) + 1;
+        const numeroCelular = desfase.celulares + Math.floor(indice / 2) + 1;
 
         const celularAsignado =
           `Celular ${String(numeroCelular).padStart(2, '0')}`;
@@ -101,7 +147,7 @@
         colaboradores.push([
           String(registro.id),
           numeroCelular,
-          indice + 1,
+          desfase.personas + indice + 1,
           String(persona.nombre || ''),
           String(persona.codigo || '')
         ]);

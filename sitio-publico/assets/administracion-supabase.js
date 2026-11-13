@@ -84,6 +84,10 @@
       inicio += 500;
     }
 
+    // El Excel numera celulares y colaboradores por módulo, sin importar
+    // los filtros aplicados.
+    window.solicitudesTodas = solicitudes;
+
     const region = porId('filter-region');
     const finca = porId('filter-farm');
     const modulo = porId('filter-module');
