@@ -36,6 +36,7 @@
 
   const peopleContent = $('people-content');
   const deviceList = $('device-list');
+  const phonesNow = $('phones-now');
   const submit = $('submit-btn');
   const formHint = $('form-hint');
 
@@ -73,6 +74,59 @@
       : null;
   }
 
+  // Pedidos parciales: la base devuelve lo ya registrado y lo pendiente del modulo.
+  // Se cuenta por telefonos: si un modulo pedido completo sube de 5 a 6 personas,
+  // siguen siendo los mismos 3 celulares. Sin esos datos se asume que no hay pedidos.
+  function wholeNumber(value) {
+    if (value === null || value === undefined || value === '') return null;
+
+    const cantidad = Number(value);
+
+    return Number.isInteger(cantidad) && cantidad >= 0 ? cantidad : null;
+  }
+
+  function registeredPeople(row) {
+    return wholeNumber(row.personas_registradas) ?? 0;
+  }
+
+  function pendingPeople(row) {
+    const count = countOf(row);
+
+    if (count === null) return null;
+
+    return wholeNumber(row.personas_pendientes) ??
+      Math.max(count - registeredPeople(row), 0);
+  }
+
+  function totalPhones(row) {
+    const count = countOf(row);
+
+    return count === null ? null : Math.ceil(count / 2);
+  }
+
+  function pendingPhones(row) {
+    const count = countOf(row);
+
+    if (count === null) return null;
+
+    return wholeNumber(row.celulares_pendientes) ??
+      Math.ceil(pendingPeople(row) / 2);
+  }
+
+  function moduleLabel(row) {
+    if (pendingPhones(row) === totalPhones(row)) return row.codigo_modulo;
+
+    const pending = pendingPhones(row);
+    const total = totalPhones(row);
+
+    return `${row.codigo_modulo} · quedan ${pending} de ${total} ` +
+      (total === 1 ? 'celular' : 'celulares');
+  }
+
+  function plural(cantidad, uno, varios) {
+    return `${cantidad} ${cantidad === 1 ? uno : varios}`;
+  }
+
   function resetModule() {
     selected = null;
 
@@ -82,6 +136,8 @@
 
     peopleContent.classList.add('hidden');
     deviceList.replaceChildren();
+    $('partial-picker').classList.add('hidden');
+    phonesNow.replaceChildren();
 
     $('people-count').textContent = '—';
     $('phone-count').textContent = '—';
@@ -208,7 +264,7 @@
       .forEach(fila => {
         addOption(
           modulo,
-          fila.codigo_modulo,
+          moduleLabel(fila),
           fila.codigo_modulo
         );
       });
@@ -246,7 +302,7 @@
       count === null ? 'Sin dato' : count;
 
     $('phone-count').textContent =
-      count === null ? '—' : Math.ceil(count / 2);
+      count === null ? '—' : pendingPhones(selected);
 
     if (count === null || count === 0) {
       $('data-alert').classList.remove('hidden');
@@ -264,22 +320,88 @@
     peopleContent.classList.remove('hidden');
     $('step-people').classList.add('active');
 
-    const devices = Math.ceil(count / 2);
+    // Pedido parcial: el jefe elige cuantos de los celulares pendientes pide ahora.
+    const pending = pendingPhones(selected);
+    const yaPedidos = totalPhones(selected) - pending;
 
-    $('allocation-text').textContent =
-      `${count} ${count === 1 ? 'persona asignada' : 'personas asignadas'} · ` +
-      `${devices} ${devices === 1 ? 'celular a solicitar' : 'celulares a solicitar'}` +
-      `${count % 2 ? ' · El último celular corresponde a una sola persona.' : '.'}`;
-
-    for (let device = 0; device < devices; device++) {
-      createDevice(device, count);
+    for (let cantidad = pending; cantidad >= 1; cantidad--) {
+      addOption(
+        phonesNow,
+        plural(cantidad, 'celular', 'celulares') +
+          (cantidad === pending
+            ? (yaPedidos ? ' (todos los pendientes)' : ' (todos)')
+            : ''),
+        String(cantidad)
+      );
     }
 
-    formHint.textContent =
-      'Completa los datos de todos los colaboradores para registrar.';
+    phonesNow.value = String(pending);
+    $('partial-picker').classList.toggle('hidden', pending < 2);
+
+    renderDevices();
+  });
+
+  phonesNow.addEventListener('change', renderDevices);
+
+  function phonesRequested() {
+    const pending = pendingPhones(selected);
+    const cantidad = Number(phonesNow.value);
+
+    return Number.isInteger(cantidad) && cantidad >= 1 && cantidad <= pending
+      ? cantidad
+      : pending;
+  }
+
+  function peopleRequested() {
+    return Math.min(phonesRequested() * 2, pendingPeople(selected));
+  }
+
+  function renderDevices() {
+    if (!selected) return;
+
+    // Conserva lo ya escrito si el jefe cambia la cantidad de celulares.
+    const escritos = {};
+
+    deviceList.querySelectorAll('.person-input').forEach(input => {
+      escritos[`${input.dataset.person}|${input.dataset.field}`] = input.value;
+    });
+
+    deviceList.replaceChildren();
+
+    const count = countOf(selected);
+    const phones = phonesRequested();
+    const people = peopleRequested();
+    const pending = pendingPhones(selected);
+    const yaPedidos = totalPhones(selected) - pending;
+    const resto = pending - phones;
+
+    $('allocation-text').textContent =
+      `${plural(count, 'persona asignada', 'personas asignadas')} · ` +
+      `${plural(totalPhones(selected), 'celular', 'celulares')} en total` +
+      (yaPedidos
+        ? ` · ya ${yaPedidos === 1 ? 'se pidió 1' : `se pidieron ${yaPedidos}`}`
+        : '') +
+      ` · ahora: ${plural(phones, 'celular', 'celulares')} para ` +
+      `${plural(people, 'colaborador', 'colaboradores')}` +
+      (resto
+        ? `. ${resto === 1 ? 'Queda 1' : `Quedan ${resto}`} para pedir después.`
+        : '.') +
+      (people % 2 ? ' El último celular corresponde a una sola persona.' : '');
+
+    for (let device = 0; device < phones; device++) {
+      createDevice(device, people, yaPedidos, registeredPeople(selected));
+    }
+
+    deviceList.querySelectorAll('.person-input').forEach(input => {
+      const valor = escritos[`${input.dataset.person}|${input.dataset.field}`];
+
+      if (valor) input.value = valor;
+    });
+
+    $('phone-count').textContent = phones;
 
     updateValidation();
-  });
+  }
 
   function element(tag, className, content) {
     const node = document.createElement(tag);
@@ -295,7 +417,9 @@
     return node;
   }
 
-  function createDevice(index, count) {
+  // phoneOffset y personOffset solo cambian la numeracion visible, para que
+  // continue despues de lo ya pedido; data-person sigue siendo 0..count-1.
+  function createDevice(index, count, phoneOffset = 0, personOffset = 0) {
     const card = element('div', 'device-card');
     const header = element('div', 'device-header');
 
@@ -303,7 +427,7 @@
       element(
         'strong',
         '',
-        `Celular ${String(index + 1).padStart(2, '0')}`
+        `Celular ${String(phoneOffset + index + 1).padStart(2, '0')}`
       ),
       element(
         'span',
@@ -327,7 +451,11 @@
       const row = element('div', 'person-row');
 
       row.append(
-        element('span', 'person-number', String(personIndex + 1))
+        element(
+          'span',
+          'person-number',
+          String(personOffset + personIndex + 1)
+        )
       );
 
       const campos = [
@@ -351,7 +479,7 @@
 
         input.setAttribute(
           'aria-label',
-          `${label} ${personIndex + 1}`
+          `${label} ${personOffset + personIndex + 1}`
         );
 
         field.append(input);
@@ -417,10 +545,11 @@
   submit.addEventListener('click', async () => {
     if (!selected || submit.disabled) return;
 
-    const count = countOf(selected);
+    const people = peopleRequested();
+    const phones = phonesRequested();
 
     const colaboradores = Array.from(
-      { length: count },
+      { length: people },
       (_, index) => ({
         nombre: deviceList.querySelector(
           `[data-person="${index}"][data-field="nombre"]`
@@ -433,7 +562,7 @@
     );
 
     const celulares = Array.from(
-      { length: Math.ceil(count / 2) },
+      { length: phones },
       () => ({ inventario: '' })
     );
 
@@ -462,13 +591,15 @@
               error.code === '23505' ||
               (
                 error.code === 'P0001' &&
-                error.message ===
-                  'Ya existe una solicitud para el módulo seleccionado.'
+                [
+                  'Ya existe una solicitud para el módulo seleccionado.',
+                  'Este módulo ya no tiene celulares pendientes.'
+                ].includes(error.message)
               );
 
             const fallo = new Error(
               esDuplicado
-                ? 'Este módulo ya tiene una solicitud registrada.'
+                ? 'Este módulo ya no tiene celulares pendientes.'
                 : error.message
             );
 
@@ -529,13 +660,21 @@
 
     processedSelection = selected;
 
-    const cantidadCelulares = Math.ceil(count / 2);
+    // Lo pedido ya cuenta: el modulo sigue en la lista solo si le quedan celulares.
+    const quedan = pendingPhones(selected) - phones;
+
+    selected.personas_pendientes = pendingPeople(selected) - people;
+    selected.celulares_pendientes = quedan;
+    selected.personas_registradas = registeredPeople(selected) + people;
 
     $('success-text').textContent =
-      `${cantidadCelulares} ` +
-      `${cantidadCelulares === 1 ? 'celular solicitado' : 'celulares solicitados'} ` +
-      `para ${count} ${count === 1 ? 'colaborador' : 'colaboradores'} ` +
-      `en ${selected.codigo_modulo}. Referencia: ${recordId}.`;
+      `${plural(phones, 'celular solicitado', 'celulares solicitados')} ` +
+      `para ${plural(people, 'colaborador', 'colaboradores')} ` +
+      `en ${selected.codigo_modulo}. ` +
+      (quedan
+        ? `En este módulo ${quedan === 1 ? 'queda 1 celular' : `quedan ${quedan} celulares`} por pedir. `
+        : '') +
+      `Referencia: ${recordId}.`;
 
     $('success-modal').classList.remove('hidden');
     $('new-entry').focus();
@@ -545,7 +684,11 @@
     $('success-modal').classList.add('hidden');
 
     if (processedSelection) {
-      removeProcessed(processedSelection);
+      if (pendingPhones(processedSelection) > 0) {
+        refreshRegions();
+      } else {
+        removeProcessed(processedSelection);
+      }
     }
 
     processedSelection = null;
